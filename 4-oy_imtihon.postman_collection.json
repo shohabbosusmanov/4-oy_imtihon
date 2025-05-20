@@ -1,0 +1,737 @@
+{
+	"info": {
+		"_postman_id": "cfb2a9d1-5d02-4f2c-9f2f-80a928646bb5",
+		"name": "4-oy_imtihon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42650204"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n       \"full_name\": \"aali valiyev\",\n       \"username\": \"alsijon\",\n       \"email\": \"alisjon@example.com\",\n       \"password\": \"Alijon!1\"\n     }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/auth/register",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n       \"email\": \"alisjon@example.com\",\n       \"password\": \"Alijon!1\"\n     }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/profile",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_profile",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "full_name",
+							"value": "scscksm",
+							"type": "text"
+						},
+						{
+							"key": "phone_number",
+							"value": "998991234567",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "Uzbekistan",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/home/shohabbos/Pictures/Screenshots/Screenshot From 2025-05-03 23-21-20.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:4000/api/profile",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/auth/logout",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "subscriptions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n       \"plan_id\": \"8e189156-78db-46a8-8acc-6cac4ccbe9e8\",\n       \"payment_method\": \"card\",\n       \"auto_renew\": true,\n       \"payment_details\": {\n         \"card_number\": \"4242XXXXXXXX4242\",\n         \"expiry\": \"04/26\",\n         \"card_holder\": \"ALIJON VALIYEV\"\n       }\n     }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/subscriptions/purchase",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"subscriptions",
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create_subscriptions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n      \"name\": \"Premium+\",\n           \"price\": 49.99,\n           \"duration_days\": 30,\n           \"features\": [\"HD sifatli kinolar\", \"Reklamasiz\", \"Yangi kinolar\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/subscriptions/create",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"subscriptions",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "subscriptions_plans",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/subscriptions/plans",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"subscriptions",
+						"plans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create_admin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n       \"email\": \"alisjon@example.com\",\n       \"password\": \"Alijon!1\"\n     }"
+				},
+				"url": {
+					"raw": "localhost:4000/api/admin/create-category",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"admin",
+						"create-category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create_category",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"skcnmskc\",\n    \"description\": \"sncmkdm\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/admin/create-category",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"admin",
+						"create-category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create_movie",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "djnakmcska",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "scaascasc",
+							"type": "text"
+						},
+						{
+							"key": "release_year",
+							"value": "2020",
+							"type": "text"
+						},
+						{
+							"key": "duration_minutes",
+							"value": "105",
+							"type": "text"
+						},
+						{
+							"key": "rating",
+							"value": "6.5",
+							"type": "text"
+						},
+						{
+							"key": "subscription_type",
+							"value": "free",
+							"type": "text"
+						},
+						{
+							"key": "category_ids",
+							"value": "[\"951d1b2e-f515-4ab1-8fc0-e847350ab451\", \"e7a82ea6-46a8-4c2e-aac6-b39c17d92668\"]",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "postman-cloud:///1f008df4-2a4c-4830-9b90-1fe09ef17748"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:4000/api/admin/movies",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"admin",
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_movie",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "vsvsvsd",
+							"type": "text"
+						},
+						{
+							"key": "category_ids",
+							"value": "[\"951d1b2e-f515-4ab1-8fc0-e847350ab451\"]",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:4000/api/admin/movies/98ba3fbc-1227-49c0-bf54-7788f56a9e7f",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"admin",
+						"movies",
+						"98ba3fbc-1227-49c0-bf54-7788f56a9e7f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addMovieFiles",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "quality",
+							"value": "p480",
+							"type": "text"
+						},
+						{
+							"key": "language",
+							"value": "uz",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "postman-cloud:///1f008df4-2a4c-4830-9b90-1fe09ef17748"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:4000/api/admin/movies/98ba3fbc-1227-49c0-bf54-7788f56a9e7f/files",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"admin",
+						"movies",
+						"98ba3fbc-1227-49c0-bf54-7788f56a9e7f",
+						"files"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addMovieFiles Copy",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/admin/movies/98ba3fbc-1227-49c0-bf54-7788f56a9e7f",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"admin",
+						"movies",
+						"98ba3fbc-1227-49c0-bf54-7788f56a9e7f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMovies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/movies/?page=1&limit=20&category=skcscsnssmsskc&search=djnakmcska&subscription_type=free",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"movies",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "20"
+						},
+						{
+							"key": "category",
+							"value": "skcscsnssmsskc"
+						},
+						{
+							"key": "search",
+							"value": "djnakmcska"
+						},
+						{
+							"key": "subscription_type",
+							"value": "free"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMoviesBySlug",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/movies/?page=1&limit=20&category=skcscsnssmsskc&search=djnakmcska&subscription_type=free",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"movies",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "20"
+						},
+						{
+							"key": "category",
+							"value": "skcscsnssmsskc"
+						},
+						{
+							"key": "search",
+							"value": "djnakmcska"
+						},
+						{
+							"key": "subscription_type",
+							"value": "free"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addFavorite",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"movie_id\": \"98ba3fbc-1227-49c0-bf54-7788f56a9e7f\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/favorites",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"favorites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getFavorites",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4000/api/favorites",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"favorites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteFavorite",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4000/api/favorites/98ba3fbc-1227-49c0-bf54-7788f56a9e7f",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"favorites",
+						"98ba3fbc-1227-49c0-bf54-7788f56a9e7f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addReview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"rating\": 4,\n    \"comment\": \"scjnsc\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/movies/98ba3fbc-1227-49c0-bf54-7788f56a9e7f/reviews",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"movies",
+						"98ba3fbc-1227-49c0-bf54-7788f56a9e7f",
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteReview",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/movies/98ba3fbc-1227-49c0-bf54-7788f56a9e7f/reviews/4e7988f8-2bcf-46e9-9359-e78709f9b142",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"movies",
+						"98ba3fbc-1227-49c0-bf54-7788f56a9e7f",
+						"reviews",
+						"4e7988f8-2bcf-46e9-9359-e78709f9b142"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMovies",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/admin/movies",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"admin",
+						"movies"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

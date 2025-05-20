@@ -1,0 +1,214 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+enum Role {
+    user
+    admin
+    superadmin
+}
+
+enum Subscription_status {
+    active
+    expired
+    canceled
+    pending_payment
+}
+
+enum Payment_method {
+    card
+    paypal
+    bank_transfer
+    crypto
+}
+
+enum Payment_status {
+    pending
+    completed
+    failed
+    refunded
+}
+
+enum Subscription_type {
+    free
+    premium
+}
+
+enum Quality {
+    p240  @map("240p")
+    p360  @map("360p")
+    p480  @map("480p")
+    p720  @map("720p")
+    p1080 @map("1080p")
+    k4    @map("4K")
+}
+
+model User {
+    id            String              @id @default(uuid())
+    full_name     String              @db.VarChar(100)
+    username      String              @unique @db.VarChar(50)
+    email         String              @unique @db.VarChar(100)
+    password      String              @db.VarChar(255)
+    role          Role?               @default(user)
+    avatar_url    String?             @db.VarChar(255)
+    phone_number  String?             @db.VarChar(20)
+    country       String?             @db.VarChar(50)
+    created_at    DateTime            @default(now())
+    updated_at    DateTime            @updatedAt
+    subscription  User_subscription[]
+    movie         Movie[]
+    favorite      Favorite[]
+    review        Review[]
+    watch_history Watch_history[]
+
+    @@map("users")
+}
+
+model Subscription_plan {
+    id            String              @id @default(uuid())
+    name          String              @unique() @db.VarChar(50)
+    price         Float
+    duration_days Int
+    features      Json
+    is_active     Boolean             @default(true)
+    subscription  User_subscription[]
+
+    @@map("subscription_plans")
+}
+
+model User_subscription {
+    id         String              @id @default(uuid())
+    user_id    String
+    plan_id    String
+    start_date DateTime            @default(now())
+    end_date   DateTime?
+    status     Subscription_status @default(active)
+    auto_renew Boolean             @default(false)
+    created_at DateTime            @default(now())
+
+    user     User              @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    plan     Subscription_plan @relation(fields: [plan_id], references: [id], onDelete: Cascade)
+    payments Payment[]
+
+    @@unique([user_id, plan_id])
+    @@map("subscription")
+}
+
+model Payment {
+    id                      String         @id @default(uuid())
+    user_subscription_id    String
+    amount                  Float
+    payment_method          Payment_method
+    payment_details         Json
+    status                  Payment_status @default(pending)
+    external_transaction_id String         @default(uuid())
+    created_at              DateTime       @default(now())
+
+    subscription User_subscription @relation(fields: [user_subscription_id], references: [id], onDelete: Cascade)
+}
+
+model Category {
+    id          String @id @default(uuid())
+    name        String @unique() @db.VarChar(50)
+    description String
+
+    movieCategories Movie_category[]
+
+    @@map("categories")
+}
+
+model Movie {
+    id                String            @id @default(uuid())
+    title             String            @unique() @db.VarChar(100)
+    slug              String?           @unique
+    description       String
+    release_year      Int
+    duration_minutes  Int
+    poster_url        String?           @db.VarChar(255)
+    rating            Float
+    subscription_type Subscription_type @default(free)
+    view_count        Int               @default(0)
+    created_by        String
+    created_at        DateTime          @default(now())
+
+    creator          User             @relation(fields: [created_by], references: [id])
+    movie_categories Movie_category[]
+    files            Movie_file[]
+    favorites        Favorite[]
+    reviews          Review[]
+    watch_history    Watch_history[]
+
+    @@map("movies")
+}
+
+model Movie_category {
+    id          String @id @default(uuid())
+    movie_id    String
+    category_id String
+
+    movie    Movie    @relation(fields: [movie_id], references: [id], onDelete: Cascade)
+    category Category @relation(fields: [category_id], references: [id], onDelete: Cascade)
+
+    @@map("movie_categories")
+}
+
+model Movie_file {
+    id       String  @id @default(uuid())
+    movie_id String
+    file_url String  @db.VarChar(255)
+    quality  Quality
+    language String  @default("uz") @db.VarChar(20)
+    size_MB  Float
+
+    movie Movie @relation(fields: [movie_id], references: [id], onDelete: Cascade)
+
+    @@map("movie_files")
+}
+
+model Favorite {
+    id         String   @id @default(uuid())
+    user_id    String
+    movie_id   String
+    created_at DateTime @default(now())
+
+    user  User  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    movie Movie @relation(fields: [movie_id], references: [id], onDelete: Cascade)
+
+    @@unique([user_id, movie_id])
+    @@map("favorites")
+}
+
+model Review {
+    id         String   @id @default(uuid())
+    user_id    String
+    movie_id   String
+    rating     Int
+    comment    String
+    created_at DateTime @default(now())
+
+    user  User  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    movie Movie @relation(fields: [movie_id], references: [id], onDelete: Cascade)
+
+    @@unique([user_id, movie_id])
+    @@map("reviews")
+}
+
+model Watch_history {
+    id                 String   @id @default(uuid())
+    user_id            String
+    movie_id           String
+    watched_duration   Int
+    watched_percentage Float
+    last_watched       DateTime @default(now())
+
+    user  User  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    movie Movie @relation(fields: [movie_id], references: [id], onDelete: Cascade)
+
+    @@unique([user_id, movie_id])
+    @@map("watch_histories")
+}
